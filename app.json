@@ -1,0 +1,32 @@
+{
+  "name": "Winter E-Commerce Store",
+  "description": "A modern winter accessories e-commerce store",
+  "repository": "https://github.com/Md-Shakil-24/Winter-E-com",
+  "keywords": ["php", "mysql", "ecommerce", "winter"],
+  "buildpacks": [
+    {
+      "url": "heroku/php"
+    }
+  ],
+  "addons": [
+    "cleardb:ignite"
+  ],
+  "env": {
+    "MYSQLHOST": {
+      "description": "MySQL host (automatically set)",
+      "required": false
+    },
+    "MYSQLUSER": {
+      "description": "MySQL user (automatically set)",
+      "required": false
+    },
+    "MYSQLPASSWORD": {
+      "description": "MySQL password (automatically set)",
+      "required": false
+    },
+    "MYSQLDATABASE": {
+      "description": "MySQL database name (automatically set)",
+      "required": false
+    }
+  }
+}
