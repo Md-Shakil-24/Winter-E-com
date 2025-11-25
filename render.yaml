@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: winter-e-com
+    env: php
+    plan: free
+    buildCommand: composer install
+    startCommand: "php -S 0.0.0.0:10000"
+    envVars:
+      - key: MYSQLHOST
+        scope: build
+        value: localhost
+      - key: MYSQLUSER
+        scope: build
+        value: root
+      - key: MYSQLPASSWORD
+        scope: build
+        value: ""
+      - key: MYSQLDATABASE
+        scope: build
+        value: winter-e-com
+
+  - type: pserv
+    name: winter-e-com-db
+    ipAllowList: []
+    plan: free
