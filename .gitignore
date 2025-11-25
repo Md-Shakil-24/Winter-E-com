@@ -1,0 +1,25 @@
+# Local environment
+.env
+.env.local
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+
+# Uploads (optional - if you want to ignore user uploads)
+# uploads/*
+# !uploads/.gitkeep
+
+# Session files
+session/
+
+# Composer
+vendor/
+composer.lock

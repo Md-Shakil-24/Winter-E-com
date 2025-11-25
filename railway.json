@@ -1,0 +1,9 @@
+# Railway Configuration File
+# https://railway.app/docs
+
+[build]
+# No build command needed for PHP
+
+[deploy]
+# Railway automatically detects PHP and MySQL
+startCommand = "php -S localhost:8080 -t ."
