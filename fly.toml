@@ -1,0 +1,7 @@
+app = "winter-e-com"
+
+[build]
+  image = ""
+
+[env]
+  # Add any environment variables here if you want
