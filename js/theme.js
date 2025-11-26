@@ -11,28 +11,28 @@ class HeroSlider {
                 title: '❄️ Welcome to winter-E-com',
                 subtitle: 'Your Ultimate Destination for Premium Winter Accessories',
                 description: 'Discover stylish, warm, and durable winter wear for every season',
-                image: 'https://images.unsplash.com/photo-1521751753848-e91b84b561b1?w=1200&h=600&fit=crop',
+                image: 'https://i.ibb.co.com/209DMpWv/winter-pic.jpg',
                 cta: 'Shop Now'
             },
             {
                 title: '🧥 Premium Jackets & Coats',
                 subtitle: 'Stay Warm with Our Exclusive Collection',
                 description: 'Waterproof, insulated, and stylish winter jackets for all occasions',
-                image: 'https://images.unsplash.com/photo-1539533057440-7cf90b2fed8a?w=1200&h=600&fit=crop',
+                image: 'https://i.ibb.co.com/s972gbxP/jaket.jpg',
                 cta: 'Shop Jackets'
             },
             {
                 title: '❄️ Winter Essentials',
                 subtitle: 'Everything You Need for the Cold Season',
                 description: 'From scarves to boots, we have all your winter accessories',
-                image: 'https://images.unsplash.com/photo-1577734302045-b8c57597a10b?w=1200&h=600&fit=crop',
+                image: 'https://i.ibb.co.com/bjdZtVQD/drawn-winter-clothes-pack-free-vector.jpg',
                 cta: 'Browse Accessories'
             },
             {
                 title: '🎉 Special Winter Deals',
                 subtitle: 'Up to 50% Off on Selected Items',
                 description: 'Limited time offers on your favorite winter products',
-                image: 'https://images.unsplash.com/photo-1545634411-6d7dab1cc3cd?w=1200&h=600&fit=crop',
+                image: 'https://i.ibb.co.com/PvPxqKkC/win.jpg',
                 cta: 'View Deals'
             }
         ];
@@ -258,24 +258,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     new NavbarScroller();
 
-    // Search functionality
-    const searchInput = document.querySelector('#searchInput');
-    const searchBtn = document.querySelector('#searchBtn');
-    const searchResults = document.querySelector('#searchResults');
-
-    if (searchBtn && searchInput) {
-        searchBtn.addEventListener('click', () => performSearch());
-        searchInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') performSearch();
-        });
-    }
-
-    // Close search results when clicking outside
-    document.addEventListener('click', (e) => {
-        if (searchResults && !e.target.closest('.nav-search')) {
-            searchResults.classList.remove('active');
-        }
-    });
+    // Search functionality is handled in `js/main.js` to avoid duplicate handlers
 
     // Winter theme background animation (snowflakes)
     initWinterTheme();

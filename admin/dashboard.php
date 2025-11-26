@@ -14,7 +14,7 @@ $total_revenue = $pdo->query("SELECT SUM(total_amount) FROM orders WHERE status 
 require_once '../includes/header.php';
 ?>
 
-<div class="container">
+<div class="container" style="margin-top:70px">
     <div class="admin-layout">
         <?php include 'sidebar.php'; ?>
         
@@ -26,7 +26,7 @@ require_once '../includes/header.php';
             
             <div class="stats-grid">
                 <div class="stat-card">
-                    <div class="stat-icon" style="background: #3498db;">
+                    <div class="stat-icon" style="background: #e690f5ff;">
                         <i class="fas fa-users"></i>
                     </div>
                     <div class="stat-details">
@@ -36,7 +36,7 @@ require_once '../includes/header.php';
                 </div>
                 
                 <div class="stat-card">
-                    <div class="stat-icon" style="background: #2ecc71;">
+                    <div class="stat-icon" style="background: #749af1ff;">
                         <i class="fas fa-box"></i>
                     </div>
                     <div class="stat-details">
@@ -46,7 +46,7 @@ require_once '../includes/header.php';
                 </div>
                 
                 <div class="stat-card">
-                    <div class="stat-icon" style="background: #f39c12;">
+                    <div class="stat-icon" style="background: #f23939ff;">
                         <i class="fas fa-shopping-bag"></i>
                     </div>
                     <div class="stat-details">
@@ -55,7 +55,7 @@ require_once '../includes/header.php';
                     </div>
                 </div>
                 
-                <div class="stat-card">
+                <!-- <div class="stat-card">
                     <div class="stat-icon" style="background: #e74c3c;">
                         <i class="fas fa-dollar-sign"></i>
                     </div>
@@ -64,7 +64,7 @@ require_once '../includes/header.php';
                         <p>Total Revenue</p>
                     </div>
                 </div>
-            </div>
+            </div>  -->
             
             <div class="dashboard-sections">
                 <div class="dashboard-section">

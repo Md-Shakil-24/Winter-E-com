@@ -28,7 +28,7 @@ $products = $stmt->fetchAll();
 require_once '../includes/header.php';
 ?>
 
-<div class="container">
+<div class="container" style="margin-top:70px">
     <div class="admin-layout">
         <?php include 'sidebar.php'; ?>
         

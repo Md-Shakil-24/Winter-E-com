@@ -63,9 +63,9 @@ A complete, secure, and responsive e-commerce web application for selling premiu
 ### Step 2: Create Database
 
 1. Open phpMyAdmin (http://localhost/phpmyadmin)
-2. Create a new database named `grocerygo`
+2. Create a new database named `winter-e-com`
 3. Import the database:
-   - Click on the `grocerygo` database
+   - Click on the `winter-e-com` database
    - Go to the "Import" tab
    - Choose the file `database.sql` from the project folder
    - Click "Go" to import
@@ -79,7 +79,7 @@ A complete, secure, and responsive e-commerce web application for selling premiu
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');        // Your MySQL username
 define('DB_PASS', '');            // Your MySQL password
-define('DB_NAME', 'grocerygo');
+define('DB_NAME', 'winter');
 ```
 
 ### Step 4: Create Uploads Folder
@@ -98,8 +98,8 @@ define('DB_NAME', 'grocerygo');
 
 Use these credentials to login as admin:
 
-- **Email:** admin@grocerygo.com
-- **Password:** admin123
+- **Email:** admin@winter-e-com.com
+- **Password:** 12345678
 
 ## 📁 Project Structure
 
@@ -244,7 +244,7 @@ The application is fully responsive and works on:
 
 The database includes sample data:
 
-- 1 Admin user (admin@grocerygo.com / admin123)
+- 1 Admin user (admin@winter-e-com.com / 12345678)
 - 11 Winter Accessory categories (Jackets, Scarves, Gloves, Boots, Hats, Sweaters, Thermal Layers, Accessories, Snow Sports, Bags, Sale)
 - 44 Premium winter products across all categories
 
@@ -293,7 +293,7 @@ define('DB_NAME', 'grocerygo');     // Database name
 
 - Check if MySQL is running
 - Verify database credentials in `includes/config.php`
-- Ensure `grocerygo` database exists
+- Ensure `winter-e-com` database exists
 
 ### Image Upload Not Working
 

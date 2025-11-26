@@ -56,7 +56,7 @@ $page_title = 'Login';
 require_once 'includes/header.php';
 ?>
 
-<div class="auth-wrapper">
+<div style="margin-top: 70px" class="auth-wrapper">
     <div class="auth-container">
         <div class="auth-card login-card">
             <div class="auth-header">
@@ -116,11 +116,6 @@ require_once 'includes/header.php';
                 <p>Don't have an account? <a href="register.php">Create one now</a></p>
             </div>
 
-            <div class="demo-box">
-                <h4><i class="fas fa-info-circle"></i> Demo Credentials</h4>
-                <p>📧 Email: <strong>admin@winter-e-com.com</strong></p>
-                <p>🔐 Password: <strong>12345678</strong></p>
-            </div>
         </div>
         
         <div class="auth-side">

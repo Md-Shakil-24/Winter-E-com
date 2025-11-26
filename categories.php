@@ -12,7 +12,7 @@ $categories = $pdo->query("SELECT c.*, COUNT(p.id) as product_count FROM categor
 require_once 'includes/header.php';
 ?>
 
-<div class="container">
+<div style="margin-top: 100px" class="container">
     <section style="margin: 3rem 0;">
         <div style="text-align: center; margin-bottom: 3rem;">
             <h1 style="font-size: 2.5rem; margin-bottom: 1rem;">

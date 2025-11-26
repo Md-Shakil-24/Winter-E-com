@@ -104,6 +104,14 @@ function initSearch() {
 function performSearch(query) {
   const searchResults = document.getElementById("searchResults");
 
+  // If no query provided, read from input
+  if (typeof query === 'undefined' || query === null) {
+    const inputEl = document.getElementById('searchInput');
+    query = inputEl ? inputEl.value.trim() : '';
+  }
+
+  if (!query) return;
+
   // Get the base URL
   const baseUrl =
     window.location.origin + window.location.pathname.substring(0, window.location.pathname.lastIndexOf("/") + 1);

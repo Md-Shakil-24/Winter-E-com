@@ -4,11 +4,19 @@ require_once 'includes/config.php';
 $page_title = 'Home';
 
 // Get featured products (Seasonal Sale category)
+// Try to get Seasonal Sale products first; if none exist, fall back to latest products
 $stmt = $pdo->query("SELECT p.*, c.name as category_name FROM products p 
                     LEFT JOIN categories c ON p.category_id = c.id 
                     WHERE c.name = 'Seasonal Sale' 
                     ORDER BY p.created_at DESC LIMIT 8");
 $flash_sale_products = $stmt->fetchAll();
+if (empty($flash_sale_products)) {
+    // Fallback: show the latest products across all categories
+    $stmt = $pdo->query("SELECT p.*, c.name as category_name FROM products p 
+                        LEFT JOIN categories c ON p.category_id = c.id 
+                        ORDER BY p.created_at DESC LIMIT 8");
+    $flash_sale_products = $stmt->fetchAll();
+}
 
 // Get all categories
 $categories = $pdo->query("SELECT * FROM categories ORDER BY name")->fetchAll();
@@ -21,7 +29,7 @@ $total_products = $total_products_row['total'];
 require_once 'includes/header.php';
 ?>
 
-<section class="hero">
+<section  class="hero">
     <div id="heroSlider" class="hero-slider"></div>
 </section>
 
@@ -31,18 +39,61 @@ require_once 'includes/header.php';
         <h2 class="section-title">⭐ Featured Winter Collection</h2>
         <p class="section-subtitle">Handpicked products for the ultimate winter experience</p>
         
+        <!-- Moved search here from navbar -->
+        <div class="nav-search" style="max-width:600px; margin: 1.5rem auto 2rem;">
+            <input type="text" id="searchInput" placeholder="Search winter accessories..." />
+            <button type="button" id="searchBtn">
+                <i class="fas fa-search"></i>
+            </button>
+            <div id="searchResults" class="search-results"></div>
+        </div>
+
         <?php if (!empty($flash_sale_products)): ?>
-        <div class="grid grid-4">
-            <?php foreach ($flash_sale_products as $product): ?>
-            <div class="product-card">
+            <?php
+                // Show one large primary featured product and the rest as secondary cards
+                $primary = null;
+                if (count($flash_sale_products) > 0) {
+                    $primary = array_shift($flash_sale_products);
+                }
+            ?>
+            <div class="featured-section">
+                <?php if ($primary): ?>
+                <div class="featured-primary">
+                    <div class="product-card large">
+                        <div class="product-image">
+                            <?php 
+                            $image_path = 'uploads/' . $primary['image'];
+                            $image_src = (file_exists($image_path) && $primary['image']) ? $image_path : 'uploads/default-product.jpg';
+                            ?>
+                            <img src="<?php echo $image_src; ?>" alt="<?php echo escape_output($primary['name']); ?>" onerror="this.src='uploads/default-product.jpg'">
+                        </div>
+                        <div class="product-info">
+                            <span class="product-category"><?php echo escape_output($primary['category_name']); ?></span>
+                            <h3 class="product-name"><?php echo escape_output($primary['name']); ?></h3>
+                            <p class="product-description"><?php echo escape_output(substr($primary['description'], 0, 140)) . '...'; ?></p>
+                            <div class="product-price">$<?php echo number_format($primary['price'], 2); ?></div>
+                            <div class="product-stock">Stock: <?php echo $primary['stock']; ?> available</div>
+                            <div class="product-cta">
+                                <?php if (is_logged_in() && !is_admin()): ?>
+                                <button class="btn btn-primary btn-block" onclick="addToCart(<?php echo $primary['id']; ?>)"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+                                <?php else: ?>
+                                <a href="login.php" class="btn btn-secondary btn-block"><i class="fas fa-sign-in-alt"></i> Login to Buy</a>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <?php endif; ?>
+
+                <div class="featured-list">
+                    <?php foreach ($flash_sale_products as $product): ?>
+                    <div class="product-card small">
                 <div class="product-image">
                     <?php 
-                    $image_path = 'uploads/' . $product['image'];
-                    $image_src = (file_exists($image_path) && $product['image']) ? $image_path : 'uploads/default-product.jpg';
+                            $image_path = 'uploads/' . $product['image'];
+                            $image_src = (file_exists($image_path) && $product['image']) ? $image_path : 'uploads/default-product.jpg';
                     ?>
-                    <img src="<?php echo $image_src; ?>" 
-                         alt="<?php echo escape_output($product['name']); ?>"
-                         onerror="this.src='uploads/default-product.jpg'">
+                            <img src="<?php echo $image_src; ?>" alt="<?php echo escape_output($product['name']); ?>" onerror="this.src='uploads/default-product.jpg'">
                 </div>
                 <div class="product-info">
                     <span class="product-category"><?php echo escape_output($product['category_name']); ?></span>
@@ -51,19 +102,15 @@ require_once 'includes/header.php';
                     <div class="product-price">$<?php echo number_format($product['price'], 2); ?></div>
                     <div class="product-stock">Stock: <?php echo $product['stock']; ?> available</div>
                     
-                    <?php if (is_logged_in() && !is_admin()): ?>
-                    <button class="btn btn-primary" style="width: 100%; justify-content: center;"
-                            onclick="addToCart(<?php echo $product['id']; ?>)">
-                        <i class="fas fa-cart-plus"></i> Add to Cart
-                    </button>
-                    <?php elseif (!is_logged_in()): ?>
-                    <a href="login.php" class="btn btn-secondary" style="width: 100%; text-align: center; justify-content: center;">
-                        <i class="fas fa-sign-in-alt"></i> Login to Buy
-                    </a>
-                    <?php endif; ?>
+                            <?php if (is_logged_in() && !is_admin()): ?>
+                            <button class="btn btn-primary" style="width: 100%; justify-content: center;" onclick="addToCart(<?php echo $product['id']; ?>)"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+                            <?php elseif (!is_logged_in()): ?>
+                            <a href="login.php" class="btn btn-secondary" style="width: 100%; text-align: center; justify-content: center;"><i class="fas fa-sign-in-alt"></i> Login to Buy</a>
+                            <?php endif; ?>
                 </div>
             </div>
-            <?php endforeach; ?>
+                <?php endforeach; ?>
+            </div>
         </div>
         <?php else: ?>
         <div style="text-align: center; padding: 4rem 2rem;">
@@ -95,11 +142,11 @@ require_once 'includes/header.php';
                 <h3>Best Prices</h3>
                 <p>Competitive pricing on all winter accessories without compromising on quality.</p>
             </div>
-            <div class="feature-card">
+            <!-- <div class="feature-card">
                 <div class="feature-icon">🛡️</div>
                 <h3>Secure Shopping</h3>
                 <p>Your personal and payment information is protected with the latest security technologies.</p>
-            </div>
+            </div> -->
         </div>
     </section>
 
@@ -110,7 +157,7 @@ require_once 'includes/header.php';
         
         <div class="grid grid-3">
             <?php foreach (array_slice($categories, 0, 6) as $category): ?>
-            <a href="category.php?id=<?php echo $category['id']; ?>" class="card" style="text-align: center; padding: 2rem; text-decoration: none; color: inherit;">
+            <a href="category.php?id=<?php echo $category['id']; ?>" class="card" style="text-align: center;  padding: 2rem; text-decoration: none; color: inherit;">
                 <div style="font-size: 3rem; margin-bottom: 1rem;">
                     <?php
                     $icons = [
@@ -125,6 +172,7 @@ require_once 'includes/header.php';
                         'Snow Sports Gear' => '⛷️',
                         'Thermal Bags & Covers' => '🎒',
                         'Seasonal Sale' => '🎉'
+                        
                     ];
                     echo $icons[$category['name']] ?? '❄️';
                     ?>

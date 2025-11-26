@@ -31,11 +31,11 @@ $all_categories = $pdo->query("SELECT * FROM categories ORDER BY name")->fetchAl
 require_once 'includes/header.php';
 ?>
 
-<section class="shop-section">
+<section class="shop-section" style="margin-top: 100px;">
     <div class="container">
-        <div class="shop-layout">
+        <div class="shop-layout" >
             <!-- Left Sidebar - Categories -->
-            <aside class="shop-sidebar">
+            <!-- <aside class="shop-sidebar">
                 <div class="sidebar-widget">
                     <h3><i class="fas fa-th-large"></i> Categories</h3>
                     <ul class="category-list">
@@ -51,7 +51,7 @@ require_once 'includes/header.php';
                         <?php endforeach; ?>
                     </ul>
                 </div>
-            </aside>
+            </aside> -->
             
             <!-- Right Content - Products -->
             <div class="shop-content">

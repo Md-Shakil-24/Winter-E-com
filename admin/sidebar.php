@@ -1,4 +1,4 @@
-<aside class="admin-sidebar">
+<aside class="admin-sidebar" style="margin-top:30px">
     <div class="sidebar-header">
         <h3><i class="fas fa-cog"></i> Admin Panel</h3>
     </div>

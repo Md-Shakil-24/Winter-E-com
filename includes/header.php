@@ -14,22 +14,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <nav class="navbar">
-        <div class="container">
+    <nav  class="navbar" style="margin-bottom: 100px;">
+        <div class="container" >
             <div class="nav-brand">
                 <a href="<?php echo (strpos($_SERVER['PHP_SELF'], '/admin/') !== false) ? '../index.php' : 'index.php'; ?>" title="Go to Home">
                     <i class="fas fa-snowflake"></i>
-                    <span>winter-E-com</span>
+                    <span>Winter-E-com</span>
                 </a>
             </div>
             
-            <div class="nav-search">
-                <input type="text" id="searchInput" placeholder="Search winter accessories..." />
-                <button type="button" id="searchBtn">
-                    <i class="fas fa-search"></i>
-                </button>
-                <div id="searchResults" class="search-results"></div>
-            </div>
+            <!-- Search moved to home landing page to improve layout -->
 
             <ul class="nav-menu" id="navMenu">
                 <li><a href="<?php echo (strpos($_SERVER['PHP_SELF'], '/admin/') !== false) ? '../index.php' : 'index.php'; ?>"><i class="fas fa-home"></i> Home</a></li>

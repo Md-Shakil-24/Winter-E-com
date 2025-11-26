@@ -68,7 +68,7 @@ $page_title = 'Register';
 require_once 'includes/header.php';
 ?>
 
-<div class="auth-wrapper">
+<div class="auth-wrapper" style="margin-top: 70px;">
     <div class="auth-container">
         <div class="auth-card register-card">
             <div class="auth-header">
